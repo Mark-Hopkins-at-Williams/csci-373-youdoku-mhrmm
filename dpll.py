@@ -33,7 +33,14 @@ def unit_resolve(unit_clauses, clause):
     Clause
         The resolved clause (or None if the original clause is redundant)
     """
-    ...
+
+    preserved_literals = []
+    for literal in clause.get_literals():
+        if len(clause) > 1 and Clause([literal]) in unit_clauses:
+            return None
+        if Clause([literal.negate()]) not in unit_clauses:
+            preserved_literals.append(literal)
+    return Clause(preserved_literals)
 
 
 def unit_resolution(unit_clauses, regular_clauses):
@@ -61,7 +68,25 @@ def unit_resolution(unit_clauses, regular_clauses):
     set[Clause], set[Clause]
         The resolved unit clauses and non-unit clauses, respectively.
     """
-    ...
+
+    regular_clauses = set(regular_clauses)
+    unit_clauses = set(unit_clauses)
+    while True:
+        new_clauses = set()
+        new_unit_clauses = set(unit_clauses)
+        for clause in regular_clauses | unit_clauses:
+            new_clause = unit_resolve(unit_clauses, clause)
+            if new_clause is None:
+                pass
+            elif len(new_clause) == 1:
+                new_unit_clauses.add(new_clause)
+            else:
+                new_clauses.add(new_clause)
+        regular_clauses = new_clauses
+        if len(unit_clauses) == len(new_unit_clauses):
+            break
+        unit_clauses = new_unit_clauses
+    return unit_clauses, regular_clauses
 
 
 
@@ -126,7 +151,26 @@ class DpllSearchSpace(SatisfiabilitySearchSpace):
         list[tuple[Literal]]
             The successor states.
         """
-        ...
+
+        if len(state) == len(self.signature):
+            return []
+        unit_clauses = self.unit_clauses | set([Clause([lit]) for lit in state])
+        unit_clauses, regular_clauses = unit_resolution(unit_clauses, self.regular_clauses)
+        if cnf.c('FALSE') in regular_clauses:
+            return []
+        successors = []
+        next_var = self.signature[len(state)]
+        next_literal = None
+        for uc in unit_clauses:
+            if next_var == uc.get_literals()[0].get_symbol():
+                next_literal = uc.get_literals()[0]
+        if next_literal is not None:
+            successors.append(state + tuple([next_literal]))
+        else:
+            for value in [False, True]:
+                next_literal = Literal(next_var, polarity=value)
+                successors.append(state + tuple([next_literal]))
+        return successors
 
 
 def dpll(sent):
