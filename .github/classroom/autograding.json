@@ -1,0 +1,124 @@
+{
+  "tests": [
+    {
+      "name": "A1",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestSudokuBoard",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "A2",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestAtLeastClause",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "A3",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestAtMostClauses",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "A4",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestNonemptyClauses",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "A5",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestContentClauses",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "A6",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestCnfConversion",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "B1",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestCheckModel",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "B2",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestSearchSolver",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "B3",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestUnitResolve",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "B4",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestUnitResolution",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "B5",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestDpllSearchSpace",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "B6",
+      "setup": "sudo -H pip3 install pytest scipy numpy >/dev/null",
+      "run": "python -m unittest test.TestSudokuBoardSolve",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    }
+  ]
+}
