@@ -41,7 +41,11 @@ class SatisfiabilitySearchSpace(SearchSpace):
         bool
             True iff the state is a goal state
         """
-        ...
+
+        if len(state) < len(self.signature):
+            return False
+        model = {lit.get_symbol(): lit.get_polarity() for lit in state}
+        return self.sent.check_model(model)
 
     def get_successors(self, state):
         """Determines the possible successors of a state.
@@ -56,7 +60,13 @@ class SatisfiabilitySearchSpace(SearchSpace):
         list[tuple[str]]
             The list of valid successor states
         """
-        ...
+
+        if len(state) == len(self.signature):
+            return []
+        else:
+            next_var = self.signature[len(state)]
+            return [state + tuple([Literal(next_var, polarity=True)]),
+                    state + tuple([Literal(next_var, polarity=False)])]
 
 
 def search_solver(sent):
